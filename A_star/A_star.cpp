@@ -63,4 +63,13 @@ int Heurestic(array<array<int,2>,2> Points){
   return abs(Points[1][0]-Points[0][0])+abs(Points[1][1]-Points[0][1]); 
 }
 
+bool Compare(vector<int> a, vector<int> b){
+    /*  open list   */
+    /*  x, y, g, h  */
+
+    int f1 = a[2] + a[3]; // F1 = g1 + h1
+    int f2 = b[2] + b[3]; // F2 = g2 + h2
+    return f1>f2;
+}
+
 

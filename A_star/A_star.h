@@ -19,13 +19,11 @@ using std::ifstream;
 using std::istringstream;
 
 
-
-
-
 void PrintGrid (vector<vector <int>> Grid);
 vector<int> ReadLine(string line);
 vector<vector<int>> ReadBoard(string path);
 array<array<int,2>,2> StartGoal(vector<vector<int>> board);
 int Heurestic(array<array<int,2>,2> Points);
+bool Compare(vector<int> a, vector<int> b);
 
 #endif
