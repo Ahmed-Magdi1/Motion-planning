@@ -26,4 +26,5 @@ array<array<int,2>,2> StartGoal(vector<vector<int>> board);
 int Heurestic(array<array<int,2>,2> Points);
 bool Compare(vector<int> a, vector<int> b);
 
+
 #endif
