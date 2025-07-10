@@ -5,12 +5,16 @@
 #include <fstream>
 
 using std::cout;
+<<<<<<< HEAD
 using std::endl;
+=======
+>>>>>>> 8afea6c9f2333c8876c5e4387d2b3c2553f1ef12
 using std::vector;
 using std::string;
 using std::ifstream;
 using std::istringstream;
 
+<<<<<<< HEAD
 
 void PrintGrid (vector<vector <int>> Grid){
     
@@ -22,6 +26,8 @@ void PrintGrid (vector<vector <int>> Grid){
     }
     
 }
+=======
+>>>>>>> 8afea6c9f2333c8876c5e4387d2b3c2553f1ef12
 vector<int> ReadLine(string line){
     istringstream Nline(line);
     int n;
@@ -55,6 +61,10 @@ vector<vector<int>> ReadBoard(string path) {
 
 int main(){
     auto board = ReadBoard("grid.txt"); // Path to the grid file
+<<<<<<< HEAD
     PrintGrid(board);
 }
 
+=======
+}
+>>>>>>> 8afea6c9f2333c8876c5e4387d2b3c2553f1ef12
