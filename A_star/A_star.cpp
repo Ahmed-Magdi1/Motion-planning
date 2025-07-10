@@ -1,23 +1,13 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <fstream>
-
-using std::cout;
-using std::endl;
-using std::vector;
-using std::string;
-using std::ifstream;
-using std::istringstream;
+#include "A_star.h"
 
 void PrintGrid (vector<vector <int>> Grid){
     
     for (int i=0;i<Grid.size();i++){
         for(int j=0; j<Grid[i].size(); j++){
             cout<<Grid[i][j];
+            
         }
-        cout<<endl;
+        cout<<"\n";
     }
     
 }
@@ -53,9 +43,24 @@ vector<vector<int>> ReadBoard(string path) {
     return board;
 }
 
-int main(){
-    auto board = ReadBoard("grid.txt"); // Path to the grid file
-    PrintGrid(board);
+array<array<int,2>,2> StartGoal(vector<vector<int>> board){
+    array<array<int,2>,2>StartGoal;
+    cout<<"Please enter the starting point as x,y\n";
+    cin>>StartGoal[0][0]>>StartGoal[0][1];
+    cout<<"Please enter the goal point as x,y to find the path\n";
+    cin>>StartGoal[1][0]>>StartGoal[1][1];
+    if(board [StartGoal[0][0]][StartGoal[0][1]]==1 || board [StartGoal[1][0]][StartGoal[1][1]]==1){
+        cout<<"invalid start/goal points\n";
+        exit;
+    }
+
+    return StartGoal;
+
+}
+
+int Heurestic(array<array<int,2>,2> Points){
+
+  return abs(Points[1][0]-Points[0][0])+abs(Points[1][1]-Points[0][1]); 
 }
 
 
