@@ -12,6 +12,16 @@ void PrintGrid (vector<vector <int>> Grid){
     
 }
 
+// Compaire the F values of two node in the open list
+bool Compair(vector<int> a, vector<int> b){
+    /*  open list   */
+    /*  x, y, g, h  */
+
+    int f1 = a[2] + a[3]; // F1 = g1 + h1
+    int f2 = b[2] + b[3]; // F2 = g2 + h2
+    return f1>f2;
+}
+
 vector<int> ReadLine(string line){
     istringstream Nline(line);
     int n;
