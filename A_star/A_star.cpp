@@ -12,8 +12,8 @@ void PrintGrid (vector<vector <int>> Grid){
     
 }
 
-// Compaire the F values of two node in the open list
-bool Compair(vector<int> a, vector<int> b){
+// Compare the F values of two node in the open list
+bool Compare(vector<int> a, vector<int> b){
     /*  open list   */
     /*  x, y, g, h  */
 
