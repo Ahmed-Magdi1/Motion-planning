@@ -27,6 +27,6 @@ vector<int> ReadLine(string line);
 vector<vector<int>> ReadBoard(string path);
 array<array<int,2>,2> StartGoal(vector<vector<int>> board);
 int Heurestic(array<array<int,2>,2> Points);
-bool Compair(vector<int> a, vector<int> b)
+bool Compare(vector<int> a, vector<int> b)
 
 #endif
