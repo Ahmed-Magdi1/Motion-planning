@@ -18,14 +18,15 @@ using std::string;
 using std::ifstream;
 using std::istringstream;
 
+enum class State {kEmpty, kObstacle, kClosed, kPath, kStart, kFinish};
 
-void PrintGrid (vector<vector <int>> Grid);
-vector<int> ReadLine(string line);
-vector<vector<int>> ReadBoard(string path);
-array<array<int,2>,2> StartGoal(vector<vector<int>> board);
+void PrintGrid (vector<vector <State>> Grid);
+vector<State> ReadLine(string line);
+vector<vector<State>> ReadBoard(string path);
+array<array<int,2>,2> StartGoal(vector<vector<State>> board);
 int Heurestic(array<array<int,2>,2> Points);
 bool Compare(vector<int> a, vector<int> b);
-bool CheckValidCell(int x, int y, vector<vector<int>> board);
+bool CheckValidCell(int x, int y, vector<vector<State>> board);
 
 
 
