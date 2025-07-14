@@ -28,6 +28,7 @@ int Heurestic(array<array<int,2>,2> Points);
 bool Compare(vector<int> a, vector<int> b);
 bool CheckValidCell(int x, int y, vector<vector<State>> board);
 void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &openlist, vector<vector<State>> grid);
+void ExpandNeighborhood(array<array<int,2>,2> Points, vector<vector <State>> Grid,int g,vector<vector<int>> openlist);
 
 
 

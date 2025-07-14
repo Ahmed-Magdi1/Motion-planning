@@ -123,16 +123,5 @@ void ExpandNeighborhood(array<array<int,2>,2> Points, vector<vector <State>> Gri
       g++;
       AddToOpen(current_x,current_y,g,h,openlist,Grid);
     }
-    
-
-
-
-
-
-  }
-
-
-
-
-
-}
+      }
+    }
