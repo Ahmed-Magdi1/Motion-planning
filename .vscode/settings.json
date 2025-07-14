@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "VHDL": "vhdl",
-        "vector": "cpp"
+        "vector": "cpp",
+        "bitset": "cpp",
+        "array": "cpp"
     }
 }

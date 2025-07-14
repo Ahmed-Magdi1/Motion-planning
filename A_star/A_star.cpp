@@ -1,13 +1,23 @@
 #include "A_star.h"
 
-
 string CellString(State cell) {
   switch(cell) {
-    case State::kObstacle: return "⛰️   ";
-    case State::kPath: return "🚗   ";
-    case State::kStart: return "🚦   ";
-    case State::kFinish: return "🏁   ";
-    default: return "0   "; 
+    case State::kObstacle: return " ⛰️ ";
+    case State::kPath: return " 🚗 ";
+    case State::kStart: return " 🚦 ";
+    case State::kFinish: return " 🏁 ";
+    case State::kClosed: return " ❌ ";
+    default: return " 0 "; 
+  }
+}
+
+void PrintGridInt(vector<vector<int>> board) {
+
+  for (int i = 0; i < board.size(); i++) {
+    for (int j = 0; j < board[i].size(); j++) {
+      cout << board[i][j];
+    }
+    cout << "\n";
   }
 }
 
@@ -23,7 +33,7 @@ void PrintGrid (vector<vector <State>> Grid){
 }
 
 // Add a node to the open list 
-void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &openlist, vector<vector<State>> grid){
+void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &openlist, vector<vector<State>> &grid){
   // Add node to open vector 
   openlist.push_back(vector<int> {x, y, g, h});
   grid[x][y] = State::kClosed; // Mark grid cell as closed
@@ -106,4 +116,21 @@ bool CheckValidCell(int x, int y, vector<vector<State>> board) {
         cell = false;
   }
   return cell;
+}
+
+void ExpandNeighborhood(array<array<int, 2>, 2> Points, vector<vector<State>> &Grid, int g, vector<vector<int>> &openlist) {
+  int current_x = Points[0][0], current_y = Points[0][1], end_x = Points[1][0], end_y = Points[1][1];
+  int h;
+  array<array<int, 2>, 2> NewPoints;
+  vector<vector<int>> neigborhood = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+  for (int i; i < neigborhood.size(); i++) {
+    int x2 = current_x + neigborhood[i][0];
+    int y2 = current_y + neigborhood[i][1];
+    NewPoints = {x2, y2, end_x, end_y};
+    if (CheckValidCell(x2, y2, Grid)) {
+      h = Heurestic(NewPoints);
+      g++;
+      AddToOpen(x2, y2, g, h, openlist, Grid);
+    }
+  }
 }
