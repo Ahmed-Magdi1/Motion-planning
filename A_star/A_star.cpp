@@ -80,12 +80,19 @@ vector<vector<State>> ReadBoard(string path) {
     return board;
 }
 
-array<array<int,2>,2> StartGoal(vector<vector<State>> board){
+array<array<int,2>,2> StartGoal(vector<vector<State>> &board){
     array<array<int,2>,2>StartGoal;
     cout<<"Please enter the starting point as x,y\n";
     cin>>StartGoal[0][0]>>StartGoal[0][1];
     cout<<"Please enter the goal point as x,y to find the path\n";
     cin>>StartGoal[1][0]>>StartGoal[1][1];
+    if (StartGoal[0][0] < 0 || StartGoal[0][0] >= board.size() || 
+        StartGoal[0][1] < 0 || StartGoal[0][1] >= board[0].size() ||
+        StartGoal[1][0] < 0 || StartGoal[1][0] >= board.size() || 
+        StartGoal[1][1] < 0 || StartGoal[1][1] >= board[0].size()) {
+        cout << "Coordinates out of bounds\n";
+        exit(1);
+    }
     if(board [StartGoal[0][0]][StartGoal[0][1]]==State::kObstacle || board [StartGoal[1][0]][StartGoal[1][1]]==State::kObstacle){
         cout<<"invalid start/goal points\n";
         exit(1);
@@ -103,6 +110,7 @@ int Heurestic(array<array<int,2>,2> Points){
 bool CheckValidCell(int x, int y, vector<vector<State>> board) {
 
   bool cell;
+  if (board.empty() || board[0].empty()) return false; 
   bool x_on_grid = (x >= 0 && x < board.size());
   bool y_on_grid = (y >= 0 && y < board[0].size());
   if (x_on_grid && y_on_grid) {
@@ -118,19 +126,88 @@ bool CheckValidCell(int x, int y, vector<vector<State>> board) {
   return cell;
 }
 
-void ExpandNeighborhood(array<array<int, 2>, 2> Points, vector<vector<State>> &Grid, int g, vector<vector<int>> &openlist) {
+void ExpandNeighborhood(array<array<int, 2>, 2> Points, vector<vector<State>> &Grid, int &g, vector<vector<int>> &openlist) {
   int current_x = Points[0][0], current_y = Points[0][1], end_x = Points[1][0], end_y = Points[1][1];
   int h;
+  int curr_g=g;
   array<array<int, 2>, 2> NewPoints;
   vector<vector<int>> neigborhood = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-  for (int i; i < neigborhood.size(); i++) {
+  for (int i=0; i < neigborhood.size(); i++) {
     int x2 = current_x + neigborhood[i][0];
     int y2 = current_y + neigborhood[i][1];
-    NewPoints = {x2, y2, end_x, end_y};
+    NewPoints = {{{x2, y2}, {end_x, end_y}}};
     if (CheckValidCell(x2, y2, Grid)) {
       h = Heurestic(NewPoints);
-      g++;
-      AddToOpen(x2, y2, g, h, openlist, Grid);
+      int g2=curr_g+1;
+      AddToOpen(x2, y2, g2, h, openlist, Grid);
     }
   }
 }
+
+vector<vector<State>> Search(array<array<int, 2>, 2> Points,vector<vector<State>> board){
+  int g=0;
+  int x,y;
+  vector<vector<int>> openlist{};
+  
+  x=Points[0][0];
+  y=Points[0][1];
+  int h=Heurestic(Points);
+  
+  AddToOpen(x, y, g, h, openlist, board);
+  cout<<openlist[0][3];
+  while(openlist.size()>0){
+   
+    Sort(&openlist);
+      auto Path= openlist.back();
+      x=Path[0];
+      y=Path[1];
+      board[x][y]=State::kPath;
+      array<array<int,2>,2> CurrentPoints={{{x,y},{Points[1][0],Points[1][1]}}};
+      openlist.pop_back();
+      cout<<"yes\n";
+      
+      // if(x==StartGoalPoints[1][0]&&y==StartGoalPoints[1][1]){
+      //   PrintGrid(board);
+
+      // }  
+      if (x==Points[1][0]&&y==Points[1][1]){
+        board[Points[0][0]][Points[0][1]]=State::kStart;
+        board[Points[1][0]][Points[1][1]]=State::kFinish;
+        PrintGrid(board);
+
+        return board;
+      
+    } 
+    int current_g = Path[2]; 
+    ExpandNeighborhood(CurrentPoints,board,current_g,openlist);  
+    }
+    return std::vector<vector<State>> {};
+
+  
+
+}
+
+void Sort(vector<vector<int>> *F){
+  sort(F->begin(),F->end(),Compare);
+}
+// void blabla(){
+//   Sort(openlist);
+//     vector<int> Path= openlist.back();
+//     x=Path[0];
+//     y=Path[1];
+//     // cout<<Path[0]<<"\n";
+//     // cout<<Path[1]<<"\n";
+//     // cout<<Path[2]<<"\n";
+//     // cout<<Path[3]<<"\n";
+//     PrintGridInt(openlist);
+//     openlist.pop_back();
+//     // cout<<openlist.size()<<"\n";
+    
+//     // board[x][y]=State::kPath;    
+//     // array<array<int,2>,2> CurrentPoints={{{x,y},{StartGoalPoints[1][0],StartGoalPoints[1][1]}}};
+//     // ExpandNeighborhood(CurrentPoints,board,g,openlist);
+
+
+
+
+// }
