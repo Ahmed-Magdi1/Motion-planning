@@ -3,11 +3,11 @@
 
 string CellString(State cell) {
   switch(cell) {
-    case State::kObstacle: return "⛰️   ";
-    case State::kPath: return "🚗   ";
-    case State::kStart: return "🚦   ";
-    case State::kFinish: return "🏁   ";
-    default: return "0   "; 
+    case State::kObstacle: return " ⛰️ ";
+    case State::kPath: return " 🚗 ";
+    case State::kStart: return " 🚦 ";
+    case State::kFinish: return " 🏁 ";
+    default: return " 0 "; 
   }
 }
 
@@ -99,4 +99,33 @@ bool CheckValidCell(int x, int y, vector<vector<State>> board) {
         cell = false;
   }
   return cell;
+}
+
+void ExpandNeighborhood(array<array<int,2>,2> Points, vector<vector <State>> Grid,int g,vector<vector<int>> openlist)
+{
+  int current_x=Points[0][0],current_y=Points[0][1],end_x=Points[1][0],end_y=Points[1][1];
+  int h;
+  array<array<int,2>,2> NewPoints;
+  vector<vector<int>> neigborhood={{-1,0},{0,-1},{1,0},{0,1}};
+  for(int i; i<neigborhood.size();i++){
+    current_x+=neigborhood[i][0];
+    current_y+=neigborhood[i][1];
+    NewPoints={current_x,current_y,end_x,end_y};
+    if(CheckValidCell(current_x,current_y,Grid)){
+      h=Heurestic(NewPoints);
+      g++;
+      AddToOpen(current_x,current_y,g,h,openlist,Grid);
+    }
+    
+
+
+
+
+
+  }
+
+
+
+
+
 }
