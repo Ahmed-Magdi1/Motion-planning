@@ -22,6 +22,13 @@ void PrintGrid (vector<vector <State>> Grid){
     
 }
 
+// Add a node to the open list 
+void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &openlist, vector<vector<State>> grid){
+  // Add node to open vector 
+  openlist.push_back(vector<int> {x, y, g, h});
+  grid[x][y] = State::kClosed; // Mark grid cell as closed
+}
+
 // Compare the F values of two node in the open list
 bool Compare(vector<int> a, vector<int> b){
     /*  open list   */
