@@ -62,5 +62,20 @@ string GridSymbol(States Symbol){
         case States::kClosed: return" ❌ ";
         default: return"0";
     }
-    
+
+}
+
+bool checkvalidity(vector<int> point, vector<vector<States>> &board) {
+  int x = point[0];
+  int y = point[1];
+  if (x <= board.size() && y <= board[0].size()) {
+    cout << "You are on the grid" << "\n";
+    if (board[x][y] == States::kEmpty) {
+      cout << "The cell is empty" << "\n";
+    }
+    return true;
+  } else {
+    cout << "You are out of grid" << "\n";
+    return false;
+  }
 }
