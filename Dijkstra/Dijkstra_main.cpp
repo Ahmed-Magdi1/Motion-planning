@@ -10,7 +10,7 @@ int main() {
   // vector<int> testing {4,0,3,4};
   // PrintBoard(board); // Function to print a 2D vector
   auto board = Readboard("grid.board");
-  //   vector<int> test{init[0], init[1], goal[0], goal[1]};
-  //   checkvalidity(test, board);
-  // PrintBoard(board);
+  vector<int> test{init[0], init[1], goal[0], goal[1]};
+  checkvalidity(test, board);
+  PrintBoard(board);
 }

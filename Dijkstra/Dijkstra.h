@@ -14,8 +14,12 @@ using std::istringstream;
 using std::string;
 using std::vector;
 
-void PrintBoard(vector<vector<int>> Board);
-vector<int> Readline(string line);
-vector<vector<int>> Readboard(string boardfile);
+enum class States { kEmpty, kObstacle, kClosed, kPath, kStart, kFinish };
+
+void PrintBoard(vector<vector<States>> Board);
+vector<States> Readline(string line);
+vector<vector<States>> Readboard(string boardfile);
+string GridSymbol(States Symbol);
+bool checkvalidity(vector<int> point, vector<vector<States>> &board);
 
 #endif
