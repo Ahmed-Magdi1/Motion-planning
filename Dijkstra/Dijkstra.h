@@ -15,8 +15,8 @@ using std::istringstream;
 using std::ifstream;
 using std::string;
 
-void PrintBoard(vector<vector<char>> Board);
-vector<char> Readline(string line);
-vector<vector<char>> Readboard(string boardfile);
+void PrintBoard(vector<vector<int>> Board);
+vector<int> Readline(string line);
+vector<vector<int>> Readboard(string boardfile);
 
 #endif
