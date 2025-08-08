@@ -1,19 +1,18 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
-#include <iostream>
-#include <vector>
-#include <sstream>
 #include <fstream>
+#include <iostream>
+#include <sstream>
 #include <string>
-
+#include <vector>
 
 using std::cout;
-using std::vector;
 using std::endl;
-using std::istringstream;
 using std::ifstream;
+using std::istringstream;
 using std::string;
+using std::vector;
 
 void PrintBoard(vector<vector<int>> Board);
 vector<int> Readline(string line);
