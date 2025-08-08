@@ -7,5 +7,7 @@ int main (){
     //                           {1, 2, 3, 4, 5}};
     
     // PrintBoard(board); // Function to print a 2D vector
+    auto board = Readboard("grid.board"); 
+    PrintBoard(board);
 
 }
