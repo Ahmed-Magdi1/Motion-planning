@@ -17,5 +17,6 @@ using std::vector;
 void PrintBoard(vector<vector<int>> Board);
 vector<int> Readline(string line);
 vector<vector<int>> Readboard(string boardfile);
+bool checkvalidity(vector<int> point, vector<vector<int>> &board);
 
 #endif

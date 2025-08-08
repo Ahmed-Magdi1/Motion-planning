@@ -44,3 +44,18 @@ vector<vector<int>> Readboard(string boardfile) {
 
   return board;
 }
+
+bool checkvalidity(vector<int> point, vector<vector<int>> &board) {
+  int x = point[0];
+  int y = point[1];
+  if (x <= board.size() && y <= board[0].size()) {
+    cout << "You are on the grid" << "\n";
+    if (board[x][y] == 0) {
+      cout << "The cell is empty" << "\n";
+    }
+    return true;
+  } else {
+    cout << "You are out of grid" << "\n";
+    return false;
+  }
+}
