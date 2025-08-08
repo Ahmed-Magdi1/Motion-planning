@@ -1,39 +1,46 @@
 #include "Dijkstra.h"
 
 
-void PrintBoard(vector<vector<int>> Board){
+void PrintBoard(vector<vector<States>> Board){
 
     for (auto i: Board){
         for (auto j: i){
-            cout<< j << " ";  
+            // cout<< j << " "; 
+            cout<<GridSymbol(j);
         }
         cout << "\n" <<"";
     }
 }
 
-vector<int> Readline(string line){
+vector<States> Readline(string line){
 
   istringstream Newline(line);
 //   int n;
   char k;
   int n;
-  vector <int> row;
-  while(Newline>> n >> k && k ==',') { //if there is still characters in the line and the character is followed by ',' then the end of line is not reached
+  vector <States> row;
+  while(Newline>> n >> k && k ==',') { //checking if there is still characters in the line and the character is followed by ',' then the end of line is not reached
 
-    row.push_back(n);
+    if(n==0){
+        row.push_back(States::kEmpty);
+    }
+    else{
+        row.push_back(States::kObstacle);
+    }
+   
   }
   return row;
 }
 
-vector<vector<int>> Readboard(string boardfile){
+vector<vector<States>> Readboard(string boardfile){
 
     ifstream gridfile(boardfile);
-    vector<vector<int>> board;
+    vector<vector<States>> board;
     if (gridfile){
         string j;
       while(getline(gridfile,j)){ // checks that the end of the board is reached or not
 
-        vector<int> row= Readline(j);
+        vector<States> row= Readline(j);
 
         board.push_back(row);
         
@@ -41,7 +48,21 @@ vector<vector<int>> Readboard(string boardfile){
     } 
 }
 
-
-
 return board;
+}
+
+string GridSymbol(States Symbol){
+
+    switch (Symbol){
+        case States::kEmpty: return" 🟢 ";
+        case States::kObstacle: return" ⛰️ ";
+        case States::kPath: return" 🚗 ";
+        case States::kStart: return" 🚦 ";
+        case States::kFinish: return" 🏁 ";
+        case States::kClosed: return" ❌ ";
+        default: return"0";
+    }
+    
+
+
 }
