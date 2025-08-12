@@ -78,18 +78,13 @@ bool checkvalidity(vector<int> point, vector<vector<States>> &board) {
   int y = point[1];
   if (x <= board.size() && y <= board[0].size()) {
     if (board[x][y] == States::kEmpty) {
-      cout << "The cell is empty" << "\n";
       return true;
     }
+    return false;}
     else{
       return false;
-      return true;
     }
-    
-    return false;
-  } else {
-    return false;
-  }
+
 }
 
 void Path(vector<vector<int>> &openlist, vector<vector<States>> &grid)
