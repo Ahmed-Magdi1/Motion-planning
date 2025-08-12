@@ -12,6 +12,15 @@ void PrintBoard(vector<vector<States>> Board) {
   
 }
 
+void PrintBoardInt(vector<vector<int>> board) {
+    for (auto i: board){
+        for (auto j: i){
+            cout<< j << " "; 
+        }
+        cout << "\n" <<"";
+    }
+}
+
 vector<States> Readline(string line) {
 
   istringstream Newline(line);
@@ -68,17 +77,17 @@ bool checkvalidity(vector<int> point, vector<vector<States>> &board) {
   int x = point[0];
   int y = point[1];
   if (x <= board.size() && y <= board[0].size()) {
-    cout << "You are on the grid" << "\n";
     if (board[x][y] == States::kEmpty) {
       cout << "The cell is empty" << "\n";
       return true;
     }
     else{
       return false;
+      return true;
     }
     
+    return false;
   } else {
-    cout << "You are out of grid" << "\n";
     return false;
   }
 }
@@ -126,4 +135,26 @@ vector<vector<int>> addToPath(int x, int y, vector<vector<States>> &grid)
   pathlist.push_back({x, y});
   grid[x][y] = States::kPath;
   return pathlist;
+}
+
+
+void AddToOpen(int x, int y, int g, int x_pre, int y_pre, vector<vector<int>> &openlist, vector<vector<States>> &grid){
+  openlist.push_back(vector<int> {x, y, g, x_pre, y_pre});
+  grid[x][y] = States::kClosed;
+}
+
+void expandsearch(vector<int> Point, vector<vector<States>> &grid, vector<vector<int>> &openlist){
+  int x_current = Point[0];
+  int y_current = Point[1];
+  int g_current = Point[2];
+
+  for (int i = 0; i < 4; i++) {
+    int x_new = x_current + neigborhood[i][0];
+    int y_new = y_current + neigborhood[i][1];
+    vector<int> checkpoint{x_new, y_new};
+    if (checkvalidity(checkpoint, grid)) {
+      vector<int> validpoint{x_new, y_new, g_current, x_current, y_current};
+      AddToOpen(x_new, y_new, g_current, x_current, y_current, openlist, grid);
+    }
+  }
 }
