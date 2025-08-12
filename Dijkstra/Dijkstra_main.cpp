@@ -20,8 +20,16 @@ int main()
                                   {2, 4, 3, 1, 4}};
   // {1,-3,4,0,-3},{2,-3,5,1,-3},{3,-3,6,2,-3}};
   Path(openlist, board);
+  PrintBoard(board);
   // vector<int> test{init[0], init[1], goal[0], goal[1]};
   // checkvalidity(test, board);
-  PrintBoard(board);
+  // AddToOpen(1, 2, 7, 4, 5, boardInt, board);
+  // PrintBoardInt(boardInt);
+  // PrintBoard(board);
+  expandsearch(testing, board, boardInt);
+  PrintBoardInt(boardInt);
+  // PrintBoard(board);
+ 
   
 }
+
