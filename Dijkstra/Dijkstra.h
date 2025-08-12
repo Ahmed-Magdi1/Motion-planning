@@ -21,5 +21,7 @@ vector<States> Readline(string line);
 vector<vector<States>> Readboard(string boardfile);
 string GridSymbol(States Symbol);
 bool checkvalidity(vector<int> point, vector<vector<States>> &board);
+void Path(vector<vector<int>> &openlist, vector<vector<States>> &grid);
+vector<vector<int>> addToPath(int x,int y,vector<vector<States>> &grid);
 
 #endif

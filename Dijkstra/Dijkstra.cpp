@@ -12,7 +12,6 @@ void PrintBoard(vector<vector<States>> Board) {
   
 }
 
-
 vector<States> Readline(string line) {
 
   istringstream Newline(line);
@@ -72,10 +71,59 @@ bool checkvalidity(vector<int> point, vector<vector<States>> &board) {
     cout << "You are on the grid" << "\n";
     if (board[x][y] == States::kEmpty) {
       cout << "The cell is empty" << "\n";
+      return true;
     }
-    return true;
+    else{
+      return false;
+    }
+    
   } else {
     cout << "You are out of grid" << "\n";
     return false;
   }
+}
+
+void Path(vector<vector<int>> &openlist, vector<vector<States>> &grid)
+{
+
+  int &point_x = openlist[openlist.size() - 1][3];
+  int &point_y = openlist[openlist.size() - 1][4];
+  int start_pre_x = openlist[0][0];
+  int start_pre_y = openlist[0][1];
+  bool finish = true;
+
+  while (finish)
+  {
+    if (point_x != start_pre_x || point_y != start_pre_y)
+    {
+
+      for (int i = 0; i < openlist.size(); i++)
+      {
+
+        int new_point_x = openlist[i][0];
+        int new_point_y = openlist[i][1];
+
+        if (new_point_x == point_x && new_point_y == point_y)
+        {
+          vector<vector<int>> path = addToPath(new_point_x, new_point_y, grid);
+          cout << i << "\n";
+          point_x = openlist[i][3];
+          point_y = openlist[i][4];
+          
+        }
+      }
+    }
+    else
+    {
+      finish = false;
+    }
+  }
+}
+
+vector<vector<int>> addToPath(int x, int y, vector<vector<States>> &grid)
+{
+  vector<vector<int>> pathlist;
+  pathlist.push_back({x, y});
+  grid[x][y] = States::kPath;
+  return pathlist;
 }
