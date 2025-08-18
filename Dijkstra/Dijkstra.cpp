@@ -135,7 +135,7 @@ vector<vector<int>> addToPath(int x, int y, vector<vector<States>> &grid)
 
 void AddToOpen(int x, int y, int g, int x_pre, int y_pre, vector<vector<int>> &openlist, vector<vector<States>> &grid){
   openlist.push_back(vector<int> {x, y, g, x_pre, y_pre});
-  grid[x][y] = States::kClosed;
+  
 }
 
 void expandsearch(vector<int> Point, vector<vector<States>> &grid, vector<vector<int>> &openlist){
@@ -148,8 +148,50 @@ void expandsearch(vector<int> Point, vector<vector<States>> &grid, vector<vector
     int y_new = y_current + neigborhood[i][1];
     vector<int> checkpoint{x_new, y_new};
     if (checkvalidity(checkpoint, grid)) {
-      vector<int> validpoint{x_new, y_new, g_current, x_current, y_current};
+      // vector<int> validpoint{x_new, y_new, g_current, x_current, y_current};
       AddToOpen(x_new, y_new, g_current, x_current, y_current, openlist, grid);
+      grid[x_new][y_new] = States::kClosed;
     }
   }
+}
+
+void Search(vector<int> start_point, vector<int> goal_point, vector<vector<States>> &grid){
+  int i=0;
+  int &curr_x=start_point[0];
+  int &curr_y=start_point[1];
+  int g=0;
+  int &curr_g=g;
+  vector<int> point={curr_x,curr_y,curr_g};
+  bool flag=true;
+  vector<vector<int>> openlist;
+  grid[goal_point[0]][goal_point[1]]=States::kFinish;
+  grid[start_point[0]][start_point[1]]=States::kStart;
+
+
+
+  AddToOpen(start_point[0],start_point[1],curr_g,start_point[0],start_point[1],openlist,grid);
+  // 
+  while(grid[curr_x][curr_y]!=States::kFinish){
+    curr_g++;
+    point={curr_x,curr_y,curr_g};
+    expandsearch(point,grid,openlist);
+    i++;
+    cout<<i<<"\n";
+    cout<<"////////////////////////////////\n";
+    PrintBoardInt(openlist);
+    cout<<"////////////////////////////////\n";
+    cout<<i<<"\n";
+    curr_x=openlist[i][0];
+    curr_y=openlist[i][1];
+    cout<<i<<"\n";
+    cout<<curr_x<<","<<curr_y<<"\n";
+         
+  }
+  // AddToOpen(goal_point[0],goal_point[1],curr_g+1,curr_x,curr_y,openlist,grid);
+  // cout<<"////////////////////////////////\n";
+  // PrintBoardInt(openlist);
+  // cout<<"////////////////////////////////\n";
+  Path(openlist,grid);
+  PrintBoard(grid);
+
 }

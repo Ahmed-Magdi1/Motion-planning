@@ -26,5 +26,6 @@ void PrintBoardInt(vector<vector<int>> board);
 void expandsearch(vector<int> Point, vector<vector<States>> &grid, vector<vector<int>> &openlist);
 void Path(vector<vector<int>> &openlist, vector<vector<States>> &grid);
 vector<vector<int>> addToPath(int x,int y,vector<vector<States>> &grid);
+void Search(vector<int> start_point, vector<int> goal_point, vector<vector<States>> &grid);
 
 #endif
